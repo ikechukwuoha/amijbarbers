@@ -12,8 +12,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
-      <HeroSection />
+      {/* <HeroSection /> */}
       
       {/* Services/Products Section */}
       <div className="bg-gray-900 py-16">
@@ -40,7 +39,7 @@ const Home = () => {
       
       <Testimonials />
       <Features />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
