@@ -3,8 +3,11 @@ import {
   Calendar, Clock, ChevronLeft, ChevronRight, CreditCard, 
   User, Phone, Mail, Users, Check, AlertTriangle, X, Info
 } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
-const BookingPage = ({ service, onBack, barbers = [] }) => {
+const BookingPage = ({ onBack = [] }) => {
+const location = useLocation();
+const { service, barbers = [] } = location.state || {};
   // State for booking form
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
@@ -21,8 +24,8 @@ const BookingPage = ({ service, onBack, barbers = [] }) => {
   
   // Available time slots
   const timeSlots = [
-    '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', 
-    '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
+    '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', 
+    '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM'
   ];
 
   // Fetch booked slots on component mount and when date changes
@@ -353,36 +356,37 @@ if (!service) {
             </div>
             
             {/* Barber selection (only for barber services) */}
-            {service.category === 'barber' && barbers.length > 0 && (
-              <div>
-                <h3 className="text-lg font-medium text-white mb-3">Select Barber</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {barbers.map(barber => (
-                    <div 
-                      key={barber.id}
-                      onClick={() => setSelectedBarber(barber.id)}
-                      className={`p-3 rounded-md cursor-pointer transition-all ${
-                        selectedBarber === barber.id 
-                          ? 'bg-amber-500 text-black' 
-                          : 'bg-gray-900 text-white hover:bg-gray-800'
-                      }`}
-                    >
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center mr-3">
-                          <User size={20} className={selectedBarber === barber.id ? 'text-black' : 'text-amber-500'} />
+                {service.category === 'barber' && barbers.length > 0 && (
+                    <div>
+                    <h3 className="text-lg font-medium text-white mb-3">Select Barber</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {barbers.map(barber => (
+                        <div 
+                            key={barber.id}
+                            onClick={() => setSelectedBarber(barber.id)}
+                            className={`p-3 rounded-md cursor-pointer transition-all ${
+                            selectedBarber === barber.id 
+                                ? 'bg-amber-500 text-black' 
+                                : 'bg-gray-900 text-white hover:bg-gray-800'
+                            }`}
+                        >
+                            <div className="flex items-center">
+                            <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center mr-3">
+                                <User size={20} className={selectedBarber === barber.id ? 'text-black' : 'text-amber-500'} />
+                            </div>
+                            <div>
+                                <div className="font-medium">{barber.name}</div>
+                                <div className={`text-xs ${selectedBarber === barber.id ? 'text-black' : 'text-gray-400'}`}>
+                                {barber.specialization}, {barber.contact}
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <div>
-                          <div className="font-medium">{barber.name}</div>
-                          <div className={`text-xs ${selectedBarber === barber.id ? 'text-black' : 'text-gray-400'}`}>
-                            {barber.specialization}
-                          </div>
-                        </div>
-                      </div>
+                        ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                    </div>
+                )
+                }
           </div>
         );
       

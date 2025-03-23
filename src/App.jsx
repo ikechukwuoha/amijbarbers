@@ -109,6 +109,7 @@ import Register from './pages/Register';
 import BookingPage from './pages/BookingPage';
 
 // Create a separate component for the main layout
+// Create a separate component for the main layout
 const MainLayout = () => {
   const location = useLocation();
 
@@ -116,17 +117,19 @@ const MainLayout = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <Navbar />
       <HeroSection />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route 
-          path="/booking" 
-          element={<BookingPage service={location.state?.service} />} 
-        />
-      </Routes>
+      <main className="flex-grow py-8 my-8">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route 
+            path="/booking" 
+            element={<BookingPage service={location.state?.service} />} 
+          />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );

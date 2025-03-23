@@ -173,7 +173,13 @@ const Services = () => {
     // Navigate to booking page with service details as state or query params
     navigate('/booking', { 
       state: { 
-        service: service 
+        service: service,
+        barbers: [ // Sample barbers data
+          { id: 1, name: "James Wilson", specialization: "Classic Cuts & Styling", contact: "090857867349756495" },
+          { id: 2, name: "Michael Thompson", specialization: "Beard Grooming Expert", contact: "6755574456675747" },
+          { id: 3, name: "Robert Davis", specialization: "Luxury Shaves", contact: "0908578676767666" },
+          { id: 4, name: "David Johnson", specialization: "Modern Styles", contact: "09085786744" },
+        ]
       }
     });
   };
